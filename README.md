@@ -16,6 +16,13 @@ You can publish MicrosoftGraph config and view files into your project by runnin
 ```
 php artisan vendor:publish --tag=microsoftgraph-config
 ```
+You add the following properties to file .env:
+```
+MICROSOFT_GRAPH_CLIENT_ID=
+MICROSOFT_GRAPH_TENANT_ID=
+MICROSOFT_GRAPH_CLIENT_SECRET=
+```
+
 ## Get started with Microsoft Graph
 ### Call Microsoft Graph using the v1.0 endpoint
 
