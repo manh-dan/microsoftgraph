@@ -9,7 +9,7 @@
     },
     "authors": [
         {
-            "name": "manh-dan",
+            "name": "Huỳnh Mạnh Dần",
             "email": "danhuynh660@gmail.com"
         }
     ],
@@ -26,7 +26,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Manhdan\\Microsoftgraph\\MicrosoftGraphServiceProvider"
+                "Manhdan\\Microsoftgraph\\Provider"
             ]
         }
     }

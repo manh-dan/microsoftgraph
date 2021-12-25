@@ -3,126 +3,169 @@
 namespace Manhdan\Microsoftgraph;
 
 use Illuminate\Support\Facades\Http;
+use Manhdan\Microsoftgraph\Traits\Token;
+use Manhdan\Microsoftgraph\Traits\Request;
+use Manhdan\Microsoftgraph\Traits\Version;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Graph
 {
-    protected $exp;
-    protected $headers;
-    protected $access_token;
+    use Token, Request, Version;
 
+    /**
+     * Create a new Manhdan Microsoft Graph.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->_getAccessToken();
+        $this->version = $this->_setVersion(config('microsoftgraph.version'));
     }
 
-    public function withHeaders(array $headers)
-    {
-        $this->headers = $headers;
-        return $this;
-    }
-
+    /**
+     * Methos GET The Microsoft Graph REST API.
+     *
+     * @param  string  $url
+     * @param  array  $data
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
     public function get(string $url, array $data = [])
     {
         $this->_checkAccessToken();
 
-        $url = config('microsoftgraph.resource') . $url;
+        $url      = $this->_setUrl($url);
+        $response = Http::withToken($this->access_token);
 
         if ($this->headers) {
-            $response = Http::withToken($this->access_token)->withHeaders($this->headers)->get($url, $data);
-        } else {
-            $response = Http::withToken($this->access_token)->get($url, $data);
+            $response = $response->withHeaders($this->headers);
         }
+
+        $response = $response->get($url, $data);
 
         if ($response->successful()) {
             return $response->json();
         }
 
-        abort($response->status(), $response->json()['error']['message']);
+        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
     }
 
+    /**
+     * Methos POST The Microsoft Graph REST API.
+     *
+     * @param  string  $url
+     * @param  array  $data
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function post(string $url, array $data)
+    {
+        $this->_checkAccessToken();
+
+        $url      = $this->_setUrl($url);
+        $response = Http::withToken($this->access_token);
+
+        if ($this->headers) {
+            $response = $response->withHeaders($this->headers);
+        }
+
+        $response = $response->post($url, $data);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+    }
+
+    /**
+     * Methos PUT The Microsoft Graph REST API.
+     *
+     * @param  string  $url
+     * @param  array  $data
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
     public function put(string $url, array $data)
     {
         $this->_checkAccessToken();
 
-        $url = config('microsoftgraph.resource') . $url;
+        $url      = $this->_setUrl($url);
+        $response = Http::withToken($this->access_token);
 
         if ($this->headers) {
-            $response = Http::withToken($this->access_token)->withHeaders($this->headers)->put($url, $data);
-        } else {
-            $response = Http::withToken($this->access_token)->put($url, $data);
+            $response = $response->withHeaders($this->headers);
         }
+
+        $response = $response->put($url, $data);
 
         if ($response->successful()) {
             return $response->json();
         }
 
-        abort($response->status(), $response->json()['error']['message']);
+       throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
     }
 
+    /**
+     * Methos PATCH The Microsoft Graph REST API.
+     *
+     * @param  string  $url
+     * @param  array  $data
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
     public function patch(string $url, array $data)
     {
         $this->_checkAccessToken();
 
-        $url = config('microsoftgraph.resource') . $url;
+        $url      = $this->_setUrl($url);
+        $response = Http::withToken($this->access_token);
 
         if ($this->headers) {
-            $response = Http::withToken($this->access_token)->withHeaders($this->headers)->patch($url, $data);
-        } else {
-            $response = Http::withToken($this->access_token)->patch($url, $data);
+            $response = $response->withHeaders($this->headers);
         }
+
+        $response = $response->patch($url, $data);
 
         if ($response->successful()) {
             return $response->json();
         }
 
-        abort($response->status(), $response->json()['error']['message']);
+        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
     }
 
+     /**
+     * Methos DELETE The Microsoft Graph REST API.
+     *
+     * @param  string  $url
+     * @param  array  $data
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
     public function delete(string $url, array $data)
     {
         $this->_checkAccessToken();
 
-        $url = config('microsoftgraph.resource') . $url;
+        $url      = $this->_setUrl($url);
+        $response = Http::withToken($this->access_token);
 
         if ($this->headers) {
-            $response = Http::withToken($this->access_token)->withHeaders($this->headers)->delete($url, $data);
-        } else {
-            $response = Http::withToken($this->access_token)->delete($url, $data);
+            $response = $response->withHeaders($this->headers);
         }
+
+        $response = $response->delete($url, $data);
 
         if ($response->successful()) {
             return $response->json();
         }
 
-        abort($response->status(), $response->json()['error']['message']);
-    }
-
-    private function _getAccessToken()
-    {
-        $url  = 'https://login.microsoftonline.com/' . config('microsoftgraph.tenant_id') . '/oauth2/v2.0/token';
-        $data = [
-            'grant_type'    => config('microsoftgraph.grant_type'),
-            'client_id'     => config('microsoftgraph.client_id'),
-            'client_secret' => config('microsoftgraph.client_secret'),
-            'scope'         => config('microsoftgraph.scope'),
-        ];
-
-        $response = Http::asForm()->post($url, $data);
-
-        if ($response->successful()) {
-            $exp                = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $response['access_token'])[1]))), true)['exp'];
-            $this->exp          = $exp;
-            $this->access_token = $response['access_token'];
-            return true;
-        }
-
-        abort($response->status(), $response->json()['error_description']);
-    }
-
-    private function _checkAccessToken()
-    {
-        if (time() > $this->exp) {
-            $this->_getAccessToken();
-        }
+        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
     }
 }
+

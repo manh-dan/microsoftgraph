@@ -4,7 +4,7 @@ namespace Manhdan\Microsoftgraph;
 
 use Illuminate\Support\ServiceProvider;
 
-class MicrosoftGraphServiceProvider extends ServiceProvider
+class Provider extends ServiceProvider
 {
     /**
      * Register services.
