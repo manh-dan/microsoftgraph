@@ -36,7 +36,7 @@ class ManhDanExample
     public function run()
     {
         $graph = new Graph();
-        return $graph->withHeaders(['X-First' => 'foo'])->get('/v1.0/users');
+        return $graph->withHeaders(['X-First' => 'foo'])->get('/users');
     }
 }
 ```
@@ -52,7 +52,7 @@ class ManhDanExample
     public function run()
     {
         $graph = new Graph();
-        return $graph->withHeaders(['X-First' => 'foo'])->get('/beta/users');
+        return $graph->withHeaders(['X-First' => 'foo'])->onVersion('beta')->get('/users');
     }
 }
 ```
