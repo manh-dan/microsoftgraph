@@ -2,11 +2,9 @@
 
 namespace Manhdan\Microsoftgraph;
 
-use Illuminate\Support\Facades\Http;
 use Manhdan\Microsoftgraph\Traits\Token;
 use Manhdan\Microsoftgraph\Traits\Request;
 use Manhdan\Microsoftgraph\Traits\Version;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Graph
 {
@@ -34,22 +32,9 @@ class Graph
      */
     public function get(string $url, array $data = [])
     {
-        $this->_checkAccessToken();
-
         $url      = $this->_setUrl($url);
-        $response = Http::withToken($this->access_token);
-
-        if ($this->headers) {
-            $response = $response->withHeaders($this->headers);
-        }
-
-        $response = $response->get($url, $data);
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+        $response = $this->_createHttp()->get($url, $data);
+        return $this->_httpException($response);
     }
 
     /**
@@ -63,22 +48,9 @@ class Graph
      */
     public function post(string $url, array $data)
     {
-        $this->_checkAccessToken();
-
         $url      = $this->_setUrl($url);
-        $response = Http::withToken($this->access_token);
-
-        if ($this->headers) {
-            $response = $response->withHeaders($this->headers);
-        }
-
-        $response = $response->post($url, $data);
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+        $response = $this->_createHttp()->post($url, $data);
+        return $this->_httpException($response);
     }
 
     /**
@@ -92,22 +64,9 @@ class Graph
      */
     public function put(string $url, array $data)
     {
-        $this->_checkAccessToken();
-
         $url      = $this->_setUrl($url);
-        $response = Http::withToken($this->access_token);
-
-        if ($this->headers) {
-            $response = $response->withHeaders($this->headers);
-        }
-
-        $response = $response->put($url, $data);
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-       throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+        $response = $this->_createHttp()->put($url, $data);
+        return $this->_httpException($response);
     }
 
     /**
@@ -121,22 +80,9 @@ class Graph
      */
     public function patch(string $url, array $data)
     {
-        $this->_checkAccessToken();
-
         $url      = $this->_setUrl($url);
-        $response = Http::withToken($this->access_token);
-
-        if ($this->headers) {
-            $response = $response->withHeaders($this->headers);
-        }
-
-        $response = $response->patch($url, $data);
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+        $response = $this->_createHttp()->patch($url, $data);
+        return $this->_httpException($response);
     }
 
      /**
@@ -150,22 +96,9 @@ class Graph
      */
     public function delete(string $url, array $data)
     {
-        $this->_checkAccessToken();
-
         $url      = $this->_setUrl($url);
-        $response = Http::withToken($this->access_token);
-
-        if ($this->headers) {
-            $response = $response->withHeaders($this->headers);
-        }
-
-        $response = $response->delete($url, $data);
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+        $response = $this->_createHttp()->delete($url, $data);
+        return $this->_httpException($response);
     }
 }
 

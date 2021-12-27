@@ -54,7 +54,7 @@ trait Token
      * @param  string  $version
      * @return void
      */
-    private function _checkAccessToken()
+    private function _refreshAccessToken()
     {
         if (time() > $this->exp) {
             $this->_getAccessToken();

@@ -2,6 +2,9 @@
 
 namespace Manhdan\Microsoftgraph\Traits;
 
+use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 trait Request
 {
     /**
@@ -37,5 +40,56 @@ trait Request
             return $baseUrl . $url;
         }
         return $baseUrl . '/' . $url;
+    }
+
+    /**
+     * Create HTTP.
+     *
+     * @return Illuminate\Support\Facades\Http
+     */
+    private function _createHttp()
+    {
+        // Refresh token
+        $this->_refreshAccessToken();
+
+        // Set token for HTTP
+        $response  = Http::withToken($this->access_token);
+
+        // Set header for HTTP
+        if ($this->headers) {
+            $response = $response->withHeaders($this->headers);
+        }
+
+        return $response;
+    }
+
+    /**
+     * HTTP Exception.
+     *
+     * @param  string  $response
+     * @return Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    private function _httpException($response)
+    {
+        // Call HTTP successful
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        // Call HTTP failure
+        throw new HttpException($response->status(), $response->json()['error']['message'], null, []);
+    }
+
+    /**
+     * Create HTTP Grap.
+     *
+     * @return Illuminate\Support\Facades\Http
+     */
+    private function _createHttpGrap($graph)
+    {
+        if ($this->headers) {
+            $graph = $graph->withHeaders($this->headers);
+        }
+        return $graph->onVersion($this->version);
     }
 }

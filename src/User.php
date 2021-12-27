@@ -38,11 +38,7 @@ class User
      */
     public function list(array $params = [])
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->get('/users', $params);
+        return $this->_createHttpGrap($this->graph)->get('/users', $params);
     }
 
      /**
@@ -55,11 +51,7 @@ class User
      */
     public function create(array $params)
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->post('/users', $params);
+        return $this->_createHttpGrap($this->graph)->post('/users', $params);
     }
 
      /**
@@ -72,11 +64,7 @@ class User
      */
     public function find($id)
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->get("/users/{$id}");
+        return $this->_createHttpGrap($this->graph)->get("/users/{$id}");
     }
 
     /**
@@ -90,11 +78,7 @@ class User
      */
     public function update($id, array $params)
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->patch("/users/{$id}", $params);
+        return $this->_createHttpGrap($this->graph)->patch("/users/{$id}", $params);
     }
 
     /**
@@ -107,11 +91,7 @@ class User
      */
     public function delete($id)
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->delete("/users/{$id}");
+        return $this->_createHttpGrap($this->graph)->delete("/users/{$id}");
     }
 
     /**
@@ -123,11 +103,7 @@ class User
      */
     public function changePassword()
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->post('/me/changePassword');
+        return $this->_createHttpGrap($this->graph)->post('/me/changePassword');
     }
     /**
      * Get newly created, updated, or deleted users without having to perform a full read of the entire user collection. See change tracking for details.
@@ -139,10 +115,6 @@ class User
      */
     public function delta(array $params = [])
     {
-        $graph = $this->graph;
-        if ($this->headers) {
-            $graph = $graph->withHeaders($this->headers);
-        }
-        return $graph->onVersion($this->version)->get('/users/delta', $params);
+        return $this->_createHttpGrap($this->graph)->get('/users/delta', $params);
     }
 }
