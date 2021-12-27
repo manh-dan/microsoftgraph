@@ -21,6 +21,7 @@ You add the following properties to file .env:
 MICROSOFT_GRAPH_CLIENT_ID=
 MICROSOFT_GRAPH_TENANT_ID=
 MICROSOFT_GRAPH_CLIENT_SECRET=
+MICROSOFT_GRAPH_VERSION=
 ```
 
 ## Get started with Microsoft Graph
