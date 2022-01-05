@@ -1,8 +1,5 @@
 # Get started with the Microsoft Graph SDK for PHP
 
-[![Build Status](https://travis-ci.org/microsoftgraph/msgraph-sdk-php.svg?branch=master)](https://travis-ci.org/microsoftgraph/msgraph-sdk-php)
-[![Latest Stable Version](https://poser.pugx.org/microsoft/microsoft-graph/version)](https://packagist.org/packages/manhdan/microsoftgraph)
-
 ## Get started with the PHP Connect Sample
 If you want to play around with the PHP library, you can get up and running quickly with the [PHP Connect Sample](https://github.com/microsoftgraph/php-connect-sample). This sample will start you with a little Laravel project that helps you with registration, authentication, and making a simple call to the service.
 
@@ -60,4 +57,4 @@ class ManhDanExample
 
 ## Copyright and license
 
-Copyright (c) ManhDanBlogs Corporation. All Rights Reserved. Licensed under the MIT [license](LICENSE).
+Copyright (c) ManhDanBlogs Corporation. All Rights Reserved. Licensed under the MIT [license].
