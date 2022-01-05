@@ -1,6 +1,6 @@
 <?php
 
-namespace Manhdan\Microsoftgraph;
+namespace Manhdan\Microsoft;
 
 use Illuminate\Support\ServiceProvider;
 

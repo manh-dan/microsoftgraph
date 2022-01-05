@@ -1,10 +1,10 @@
 <?php
 
-namespace Manhdan\Microsoftgraph;
+namespace Manhdan\Microsoft\Graph;
 
-use Manhdan\Microsoftgraph\Traits\Token;
-use Manhdan\Microsoftgraph\Traits\Request;
-use Manhdan\Microsoftgraph\Traits\Version;
+use Manhdan\Microsoft\Traits\Token;
+use Manhdan\Microsoft\Traits\Request;
+use Manhdan\Microsoft\Traits\Version;
 
 class Graph
 {

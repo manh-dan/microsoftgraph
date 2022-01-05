@@ -1,10 +1,10 @@
 <?php
 
-namespace Manhdan\Microsoftgraph;
+namespace Manhdan\Microsoft\Api;
 
-use Manhdan\Microsoftgraph\Graph;
-use Manhdan\Microsoftgraph\Traits\Request;
-use Manhdan\Microsoftgraph\Traits\Version;
+use Manhdan\Microsoft\Graph\Graph;
+use Manhdan\Microsoft\Traits\Request;
+use Manhdan\Microsoft\Traits\Version;
 
 class User
 {
@@ -36,7 +36,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function list(array $params = [])
+    public function getListUser(array $params = [])
     {
         return $this->_createHttpGrap($this->graph)->get('/users', $params);
     }
@@ -49,7 +49,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function create(array $params)
+    public function createUser(array $params)
     {
         return $this->_createHttpGrap($this->graph)->post('/users', $params);
     }
@@ -62,7 +62,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function find($id)
+    public function getUser($id)
     {
         return $this->_createHttpGrap($this->graph)->get("/users/{$id}");
     }
@@ -76,7 +76,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function update($id, array $params)
+    public function updateUser($id, array $params)
     {
         return $this->_createHttpGrap($this->graph)->patch("/users/{$id}", $params);
     }
@@ -89,7 +89,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function delete($id)
+    public function deleteUser($id)
     {
         return $this->_createHttpGrap($this->graph)->delete("/users/{$id}");
     }
@@ -113,7 +113,7 @@ class User
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function delta(array $params = [])
+    public function getDelta(array $params = [])
     {
         return $this->_createHttpGrap($this->graph)->get('/users/delta', $params);
     }

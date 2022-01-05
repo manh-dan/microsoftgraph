@@ -2,11 +2,6 @@
     "name": "manhdan/microsoftgraph",
     "description": "Microsoftgraph - A simple Laravel package.",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "ManhDan\\Microsoftgraph\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Huỳnh Mạnh Dần",
@@ -14,19 +9,19 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.65"
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": ">=6.3",
+        "laravel/framework": ">=7.0"
     },
     "autoload": {
         "psr-4": {
-            "Manhdan\\Microsoftgraph\\":"src/"
+            "Manhdan\\Microsoft\\":"src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Manhdan\\Microsoftgraph\\Provider"
+                "Manhdan\\Microsoft\\Provider"
             ]
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Manhdan\Microsoftgraph\Traits;
+namespace Manhdan\Microsoft\Traits;
 
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpKernel\Exception\HttpException;
