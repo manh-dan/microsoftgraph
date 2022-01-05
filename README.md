@@ -1,7 +1,5 @@
 # Get started with the Microsoft Graph SDK for PHP
-
-## Get started with the PHP Connect Sample
-If your project uses the Microsoft Graph API, you should use this library to make it easier to implement with the Microsoft Graph API.
+If your project uses the Microsoft Graph API, you should use this library to make it easier to implement with the Microsoft Graph API.\
 Documentation Microsoft Graph API: https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
 
 ## Install the SDK
