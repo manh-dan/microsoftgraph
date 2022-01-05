@@ -1,12 +1,13 @@
 # Get started with the Microsoft Graph SDK for PHP
 
 ## Get started with the PHP Connect Sample
-If you want to play around with the PHP library, you can get up and running quickly with the [PHP Connect Sample](https://github.com/microsoftgraph/php-connect-sample). This sample will start you with a little Laravel project that helps you with registration, authentication, and making a simple call to the service.
+If your project uses the Microsoft Graph API, you should use this library to make it easier to implement with the Microsoft Graph API.
+Documentation Microsoft Graph API: https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
 
 ## Install the SDK
 You can install the PHP SDK with Composer, either run `composer require manhdan/microsoftgraph`, or edit your `composer.json` file:
 ```
-composer require manhdan/microsoftgraph
+"manhdan/microsoftgraph": "^1.0"
 ```
 ## Configuration
 You can publish MicrosoftGraph config and view files into your project by running:
