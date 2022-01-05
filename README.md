@@ -30,7 +30,7 @@ MICROSOFT_GRAPH_VERSION=
 The following is an example that shows how to call Microsoft Graph.
 
 ```php
-use Manhdan\Microsoftgraph\Graph;
+use Manhdan\Microsoft\Graph\Graph;
 
 class ManhDanExample
 {
@@ -46,7 +46,7 @@ class ManhDanExample
 The following is an example that shows how to call Microsoft Graph.
 
 ```php
-use Manhdan\Microsoftgraph\Graph;
+use Manhdan\Microsoft\Graph\Graph;
 
 class ManhDanExample
 {
